@@ -23,6 +23,7 @@
             <i class="fas fa-phone"></i>
             <span>Hemen Ara</span>
         </a>
+        <li><a href="#talep">Talep</a></li>
     </nav>
 
     <header id="home" style="position: relative;">
@@ -131,6 +132,42 @@
         </div>
     </section>
 
+    <!-- İLETİŞİM FORMU -->
+<section id="talep" style="padding: 100px 8%; background: var(--cream);">
+    <div style="max-width: 680px; margin: 0 auto; text-align: center;">
+        <span class="section-label">Talep Formu</span>
+        <h2 class="section-title fade-in">Bize Ulaşın</h2>
+        <p class="section-subtitle fade-in" style="margin: 0 auto 48px;">Ürün bilgisi, fiyat teklifi veya her türlü sorunuz için formu doldurun, en kısa sürede dönelim.</p>
+    </div>
+
+    <div class="contact-form-wrap fade-in">
+        <div class="contact-form-card">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="f-name">Adınız Soyadınız *</label>
+                    <input type="text" id="f-name" placeholder="Doğan Çelik" required>
+                </div>
+                <div class="form-group">
+                    <label for="f-phone">Telefon *</label>
+                    <input type="tel" id="f-phone" placeholder="0532 000 00 00" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="f-email">E-posta</label>
+                <input type="email" id="f-email" placeholder="ornek@mail.com">
+            </div>
+            <div class="form-group">
+                <label for="f-msg">Mesajınız *</label>
+                <textarea id="f-msg" rows="5" placeholder="Hangi ürünle ilgileniyorsunuz? Boyut, model veya fiyat bilgisi alabilirsiniz..." required></textarea>
+            </div>
+            <button class="form-submit" onclick="sendToWhatsApp()">
+                <i class="fab fa-whatsapp"></i> WhatsApp ile Gönder
+            </button>
+            <p class="form-note">* zorunlu alan — Gönder butonuna basınca WhatsApp açılır, mesajı onaylayarak iletirsiniz.</p>
+        </div>
+    </div>
+</section>
+
     <!-- FOOTER -->
     <footer id="contact">
         <div class="footer-grid">
@@ -171,6 +208,20 @@
         }, { threshold: 0.12 });
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+        function sendToWhatsApp() {
+        const name  = document.getElementById('f-name').value.trim();
+        const phone = document.getElementById('f-phone').value.trim();
+        const email = document.getElementById('f-email').value.trim();
+        const msg   = document.getElementById('f-msg').value.trim();
+
+        if (!name || !phone || !msg) {
+            alert('Lütfen ad, telefon ve mesaj alanlarını doldurun.');
+            return;
+        }
+
+        const text = `🛏️ *Viscobox Talep Formu*\n\n👤 *Ad Soyad:* ${name}\n📞 *Telefon:* ${phone}${email ? '\n📧 *E-posta:* ' + email : ''}\n\n💬 *Mesaj:*\n${msg}`;
+        window.open('https://wa.me/905323445519?text=' + encodeURIComponent(text), '_blank');
+    }
     </script>
 
 </body>
