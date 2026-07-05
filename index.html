@@ -26,12 +26,22 @@
         <li><a href="#talep">Talep</a></li>
     </nav>
 
-    <header id="home" style="position: relative;">
-        <img src="22.000.png" alt="Viscobox Luxury Yatak Koleksiyonu" class="hero-img">    
-        <div class="scroll-hint">
-            <div class="scroll-line"></div>
-            <span>Kaydır</span>
+   <header id="home">
+    <div class="slider">
+        <div class="slider-track">
+            <div class="slide"><img src="slide1.jpg" alt="Viscobox Yatak 1"></div>
+            <div class="slide"><img src="slide2.png" alt="Viscobox Yatak 2"></div>
+            <div class="slide"><img src="slide3.jpg" alt="Viscobox Yatak 3"></div>
+            <div class="slide"><img src="slide4.jpg" alt="Viscobox Yatak 4"></div>
+            <div class="slide"><img src="slide5.jpg" alt="Viscobox Yatak 5"></div>
+            <div class="slide"><img src="slide6.jpg" alt="Viscobox Yatak 6"></div>
+            <div class="slide"><img src="slide7.jpg" alt="Viscobox Yatak 7"></div>
+            <div class="slide"><img src="slide8.jpg" alt="Viscobox Yatak 8"></div>
         </div>
+        <button class="slider-btn prev" onclick="moveSlider(-1)">&#8249;</button>
+        <button class="slider-btn next" onclick="moveSlider(1)">&#8250;</button>
+        <div class="slider-dots" id="sliderDots"></div>
+    </div>
     </header>
 
     <!-- INTRO BANNER -->
@@ -222,6 +232,49 @@
         const text = `🛏️ *Viscobox Talep Formu*\n\n👤 *Ad Soyad:* ${name}\n📞 *Telefon:* ${phone}${email ? '\n📧 *E-posta:* ' + email : ''}\n\n💬 *Mesaj:*\n${msg}`;
         window.open('https://wa.me/905323445519?text=' + encodeURIComponent(text), '_blank');
     }
+    // Slider
+const track = document.querySelector('.slider-track');
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.getElementById('sliderDots');
+let current = 0;
+let autoTimer;
+
+slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Slayt ${i + 1}`);
+    dot.onclick = () => goTo(i);
+    dotsContainer.appendChild(dot);
+});
+
+function goTo(index) {
+    current = (index + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    document.querySelectorAll('.slider-dot').forEach((d, i) =>
+        d.classList.toggle('active', i === current));
+}
+
+function moveSlider(dir) {
+    goTo(current + dir);
+    resetAuto();
+}
+
+function resetAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo(current + 1), 4000);
+}
+
+resetAuto();
+
+// Touch/swipe desteği
+let touchStartX = 0;
+document.querySelector('.slider').addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+}, { passive: true });
+document.querySelector('.slider').addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) moveSlider(diff > 0 ? 1 : -1);
+});
     </script>
 
 </body>
