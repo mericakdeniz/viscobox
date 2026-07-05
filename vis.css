@@ -701,11 +701,12 @@ header {
 
 @media (max-width: 768px) {
     .slide {
-        height: 56vw !important;
+        height: 85vw !important;
     }
     .slide img {
-        height: 56vw !important;
-        max-height: 56vw !important;
+        height: 85vw !important;
+        max-height: 85vw !important;
+        object-fit: cover !important;
     }
     .slider-btn { width: 40px; height: 40px; font-size: 26px; }
 }
