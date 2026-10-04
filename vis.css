@@ -22,6 +22,7 @@
     /* aliases so existing var(--gold) references pick up blue */
     --gold:     #1A5BBF;
     --gold-lt:  #2E76E8;
+    --light-brown: #633b1fc7;
 }
 
 body {
@@ -601,7 +602,7 @@ footer {
 header {
     width: 100%;
     position: relative;
-    background: var(--dark);
+    background: var(--light-brown);
     overflow: hidden;
     padding: 40px 8%
 }
